@@ -246,3 +246,18 @@ function currentDate() {
   return new Date();
 }
 FunctionFactory.Instance.register("currentDate", currentDate);
+
+function matrixColumnHasValue(params: any[]): any {
+  if(!params || params.length !== 3) return false;
+  var arr = params[0];
+  var colName = params[1];
+  var value = params[2];
+  var el;
+  if(!arr || !Array.isArray(arr)) return false;
+  for(var i = 0; i <arr.length; i ++) {
+    el = arr[i];
+    if(!!el && el[colName] == value) return true;
+  }
+  return false;
+}
+FunctionFactory.Instance.register("matrixColumnHasValue", matrixColumnHasValue);

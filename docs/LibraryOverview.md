@@ -786,6 +786,7 @@ The table below demonstrates a list of built-in functions:
 | `avgInArray({questionName}, 'propertyName')` | Returns the average value for array of objects {questionName} by property 'propertyName'. `avgInArray('matrixdynamic', 'quantity') > 4` |
 | `minInArray({questionName}, 'propertyName')` | Returns the minimum value for array of objects {questionName} by property 'propertyName'. `minInArray('matrixdynamic', 'quantity') > 1` |
 | `maxInArray({questionName}, 'propertyName')` | Returns the maximum value for array of objects {questionName} by property 'propertyName'. `maxInArray('matrixdynamic', 'quantity') > 10` |
+| `matrixColumnHasValue({matrixQuestionName}, 'columnName', 'includedValue')` | Returns true if one ot the value of the matrix dynamic named {matrixdynamic} in the column 'columnName' has one of the value  'includedName'. `'matrixColumnHasValue({matrixQuestionName}, 'columnName', 'includedValue')'` |
 
 If you feel there is a need in a particular function, then [write us](https://github.com/surveyjs/surveyjs/issues) about it.
 

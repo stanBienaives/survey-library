@@ -3775,3 +3775,51 @@ QUnit.test(
     );
   }
 );
+
+
+QUnit.test("matrixColumnHasValue should work in visibleIf", function (assert) {
+
+  const surveyJson = {
+    pages: [{
+      name: "page1",
+      elements: [
+        {
+          type: "matrixdynamic",
+          title: "matrixdynamic",
+          name: "q1",
+          columns: [
+            {
+              name: "q1.c1",
+              cellType: "text",
+            },
+            {
+              name: "q1.c2",
+              cellType: "boolean",
+            },
+          ],
+          // choices: [1, 2, 3, 4, 5],
+        },
+        {
+          type: "text",
+          name: "q2",
+          visibleIf: "matrixColumnHasValue({q1}, 'q1.c1', 'activationValue'"
+        }
+      ]
+    }],
+  };
+  var survey = new SurveyModel(surveyJson);
+  survey.setValue("q1", { one: { col1: 10 } });
+  var matrix = <QuestionMatrixDynamicModel>survey.getQuestionByName("q1");
+  survey.setValue('q1', [
+    { 'q1.c1': 'nonactivationValue', 'q1.c2': false },
+    { 'q1.c1': 'activationValue', 'q1.c2': true },
+  ]);
+  var conditionalQuestion = <QuestionMatrixDynamicModel>survey.getQuestionByName("q2");
+  assert.equal(conditionalQuestion.isVisible, true);
+  survey.setValue('q1', [
+    { 'q1.c1': 'nonactivationValue', 'q1.c2': false },
+    { 'q1.c1': 'nonactivationValue', 'q1.c2': true },
+  ]);
+  assert.equal(conditionalQuestion.isVisible, false);
+  
+});
